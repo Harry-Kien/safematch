@@ -70,6 +70,15 @@
 
         paintRail();
 
+        /* Move the caret to the new step, otherwise a keyboard or screen
+           reader user stays parked on a button that just disappeared. */
+        var heading = stages[index].querySelector(".stage__title");
+
+        if (heading) {
+            heading.setAttribute("tabindex", "-1");
+            heading.focus({ preventScroll: true });
+        }
+
         var top = document.querySelector(".workbench").offsetTop - 90;
         window.scrollTo({
             top: top,

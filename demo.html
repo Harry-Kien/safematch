@@ -10,6 +10,16 @@
         content="A walk-through of the SafeMatch flow: ID capture, face match, liveness, verified credential, on-device risk detection, and filing a case.">
 
     <link rel="icon" type="image/png" href="logo.png">
+    <meta name="theme-color" content="#0e2440">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="SafeMatch">
+    <meta property="og:title" content="SafeMatch prototype — the verification and reporting flow">
+    <meta property="og:description"
+        content="Walk the six steps: citizen ID capture, face match, liveness challenges, credential issue, on-device risk scoring, and filing a case.">
+    <meta property="og:url" content="https://safematch-vn.vercel.app/demo.html">
+    <meta property="og:image" content="https://safematch-vn.vercel.app/og.png">
+    <meta name="twitter:card" content="summary_large_image">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,6 +31,8 @@
 </head>
 
 <body>
+
+    <a class="skip-link" href="#main">Skip to the prototype</a>
 
     <div class="strip">
         <div class="wrap strip__inner">
@@ -53,13 +65,18 @@
         </div>
     </header>
 
-    <main class="wrap workbench">
+    <main class="wrap workbench" id="main">
+
+        <h1 class="visually-hidden">
+            SafeMatch prototype — identity verification, risk detection and case
+            filing, in six steps
+        </h1>
 
         <!-- ==============================================================
              Progress rail
              ============================================================== -->
 
-        <aside class="rail">
+        <nav class="rail" aria-label="Prototype steps">
             <p class="rail__title">Flow</p>
 
             <ol class="rail__list" id="rail">
@@ -110,7 +127,7 @@
             <button class="btn btn--ghost btn--small rail__reset" type="button" id="resetDemo">
                 Restart the demo
             </button>
-        </aside>
+        </nav>
 
         <!-- ==============================================================
              Stage 01 — Citizen ID
@@ -122,7 +139,7 @@
 
                 <div class="stage__head">
                     <p class="eyebrow">Step 01 · Control A.1</p>
-                    <h1 class="stage__title">Scan the citizen ID card</h1>
+                    <h2 class="stage__title">Scan the citizen ID card</h2>
                     <p class="stage__text">
                         The applicant photographs the card, then holds it to the back of the
                         phone so the SDK can read the chip. Extracted fields are shown for
@@ -156,7 +173,7 @@
 
                             <div class="viewfinder__scan"></div>
 
-                            <div class="viewfinder__status">
+                            <div class="viewfinder__status" aria-live="polite">
                                 <span id="idStatus">Align the card inside the frame</span>
                                 <em id="idStep">idle</em>
                             </div>
@@ -170,7 +187,7 @@
                         </div>
 
                         <div class="panel__body">
-                            <div class="readout" id="idReadout">
+                            <div class="readout" id="idReadout" aria-live="polite">
                                 <div class="readout__row">
                                     <span class="readout__key">Full name</span>
                                     <span class="readout__value is-pending" data-field="name">awaiting scan</span>
@@ -224,7 +241,7 @@
 
                 <div class="stage__head">
                     <p class="eyebrow">Step 02 · Control A.2</p>
-                    <h1 class="stage__title">Match the face to the chip portrait</h1>
+                    <h2 class="stage__title">Match the face to the chip portrait</h2>
                     <p class="stage__text">
                         The selfie is compared against the portrait stored on the ID chip —
                         not against a photo the applicant uploaded. A score below the
@@ -255,7 +272,7 @@
 
                             <div class="viewfinder__scan"></div>
 
-                            <div class="viewfinder__status">
+                            <div class="viewfinder__status" aria-live="polite">
                                 <span id="faceStatus">Centre your face in the oval</span>
                                 <em id="faceStep">idle</em>
                             </div>
@@ -324,7 +341,7 @@
 
                 <div class="stage__head">
                     <p class="eyebrow">Step 03 · Control A.2</p>
-                    <h1 class="stage__title">Prove a live person is present</h1>
+                    <h2 class="stage__title">Prove a live person is present</h2>
                     <p class="stage__text">
                         Three challenges, chosen at capture time. Because the sequence is not
                         known in advance, a printed photo, a screen recording or a prepared
@@ -355,7 +372,7 @@
 
                             <div class="viewfinder__scan"></div>
 
-                            <div class="viewfinder__status">
+                            <div class="viewfinder__status" aria-live="polite">
                                 <span id="livenessStatus">Waiting to start</span>
                                 <em id="livenessStep">idle</em>
                             </div>
@@ -369,7 +386,7 @@
                         </div>
 
                         <div class="panel__body">
-                            <ol class="challenges" id="challenges">
+                            <ol class="challenges" id="challenges" aria-live="polite">
                                 <li class="challenge" data-challenge="0">
                                     <span class="challenge__mark" aria-hidden="true">✓</span>
                                     <span class="challenge__text">Blink twice</span>
@@ -409,7 +426,7 @@
 
                 <div class="stage__head">
                     <p class="eyebrow">Step 04 · Issued</p>
-                    <h1 class="stage__title">The record exists. The ID number does not travel.</h1>
+                    <h2 class="stage__title">The record exists. The ID number does not travel.</h2>
                     <p class="stage__text">
                         The verification service returns a badge with an expiry date. This is
                         the whole of what the dating platform receives — and other users see
@@ -537,7 +554,7 @@
 
                 <div class="stage__head">
                     <p class="eyebrow">Step 05 · Control B.1</p>
-                    <h1 class="stage__title">The risk engine, watching a real pattern</h1>
+                    <h2 class="stage__title">The risk engine, watching a real pattern</h2>
                     <p class="stage__text">
                         This conversation follows a common romance-fraud arc. Everything you
                         see on the right is computed on the handset; what is shown here as a
@@ -553,7 +570,7 @@
                             <span class="note" id="chatCounter">0 messages</span>
                         </div>
 
-                        <div class="chat" id="chat">
+                        <div class="chat" id="chat" aria-live="polite" aria-label="Conversation transcript">
                             <p class="chat__empty" id="chatEmpty">
                                 Play the conversation to watch the engine score it in real
                                 time.
@@ -571,7 +588,7 @@
                         </div>
 
                         <div class="meter">
-                            <p class="meter__value" id="riskValue">12 <span>of 100</span></p>
+                            <p class="meter__value" id="riskValue" aria-live="polite">12 <span>of 100</span></p>
 
                             <div class="meter__track">
                                 <div class="meter__fill" id="riskFill"></div>
@@ -584,7 +601,7 @@
                             </div>
                         </div>
 
-                        <ul class="signals" id="signals">
+                        <ul class="signals" id="signals" aria-live="polite" aria-label="Risk signals">
                             <li class="signals__empty" id="signalsEmpty">
                                 No signals raised.
                             </li>
@@ -593,7 +610,7 @@
 
                 </div>
 
-                <div class="banner is-hidden" id="riskBanner">
+                <div class="banner is-hidden" id="riskBanner" role="alert">
                     <span class="banner__mark" aria-hidden="true">!</span>
                     <div>
                         <p class="banner__title">This conversation matches a known fraud pattern</p>
@@ -623,7 +640,7 @@
 
                 <div class="stage__head">
                     <p class="eyebrow">Step 06 · Control C.1</p>
-                    <h1 class="stage__title">File the case with the evidence attached</h1>
+                    <h2 class="stage__title">File the case with the evidence attached</h2>
                     <p class="stage__text">
                         The form arrives filled in from what the app already holds. The user
                         decides what to include — nothing is released without this step —
