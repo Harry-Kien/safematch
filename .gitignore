@@ -1,0 +1,11 @@
+# Deployment
+.vercel/
+
+# Local tooling artefacts
+.playwright-mcp/
+*.log
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
